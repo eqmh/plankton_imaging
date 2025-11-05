@@ -1,0 +1,16 @@
+augmented_categories/
+classified_output/
+classified_output_filtered/
+cpics_img/
+cpics_img_other/
+deep_features/
+ImageTrainingDataset/
+models/
+randomized_balanced/
+training_dataset/
+training_dataset_augmented/
+training_library/
+TS.Master/
+unclassified_dataset/
+*.zip
+*.nc
