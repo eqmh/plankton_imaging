@@ -16,3 +16,6 @@ Migrated the following folders to a dedicated  directory ‘cpics_img_other’:
 - highlights
 - ROICoord
 - syslog
+
+11/14/2025:
+- deleted folder '20251018' because it contained corrupted .png files
