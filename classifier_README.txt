@@ -19,7 +19,7 @@ Run ‘dataAugmentation.py’ to augment classes in ‘augmented_categories’.
 
 After augmentation migrate folders in ‘augmented_categories’ to ‘training_dataset_augmented’. The folder ‘augmented_categories’ should be empty after the file migration.
 
-Then run ‘RandomImageSelection_1,2,py’ to randomly select images from the training library contained in ‘training_dataset_augmented’. Randomized and balanced training set will be contained in the ‘randomized_balanced’ folder - This is the final training set that will be used in ‘ResNet-‘ routines under the ‘Algorithm’ folder.
+Then run ‘RandomImageSelection_1.2.py’ to randomly select images from the training library contained in ‘training_dataset_augmented’. Randomized and balanced training set will be contained in the ‘randomized_balanced’ folder - This is the final training set that will be used in ‘ResNet-‘ routines under the ‘Algorithm’ folder.
 
 
  
