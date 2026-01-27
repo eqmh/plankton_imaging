@@ -12,6 +12,7 @@ training_dataset_augmented/
 training_library/
 TS.Master/
 unclassified_dataset/
+spc_uw_zoocam/
 *.zip
 *.nc
 *.png
