@@ -19,3 +19,6 @@ Migrated the following folders to a dedicated  directory ‘cpics_img_other’:
 
 11/14/2025:
 - deleted folder '20251018' because it contained corrupted .png files
+
+03/19/2026:
+- deleted folder '20260218_2100' because it contained corrupted .png files

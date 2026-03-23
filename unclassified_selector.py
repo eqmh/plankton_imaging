@@ -15,8 +15,8 @@ def filter_and_copy_png_files():
     destination_directory = Path(os.path.expanduser("~/plankton_imaging/unclassified_dataset/unclassified/"))
     
     # Define the date range for filtering (inclusive)
-    start_date = pd.Timestamp("2025-01-01 00:00:00", tz="UTC")
-    end_date = pd.Timestamp("2025-02-01 00:00:00", tz="UTC")
+    start_date = pd.Timestamp("2025-03-01 00:00:00", tz="UTC")
+    end_date = pd.Timestamp("2025-04-01 00:00:00", tz="UTC")
     # -------------------
 
     # --- Step 1: Prepare Destination Directory ---
