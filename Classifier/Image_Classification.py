@@ -57,7 +57,20 @@ if __name__ == '__main__':
 
     # Load images from unclassified_location and create DataLoader for inference
     print("loading images from unclassified location and creating dataloader for inference...")
-    images = datasets.ImageFolder(unclassified_location, transform=transform)
+    from PIL import ImageFile
+    ImageFile.LOAD_TRUNCATED_IMAGES = True
+
+    def safe_pil_loader(path):
+        try:
+            with open(path, "rb") as f:
+                img = Image.open(f)
+                return img.convert("RGB")
+        except Exception as e:
+            print(f"Warning: corrupt image blanked: {path} ({e})")
+            return Image.new("RGB", (224, 224), (0, 0, 0))
+
+    # Pass the safe loader into ImageFolder
+    images = datasets.ImageFolder(unclassified_location, transform=transform, loader=safe_pil_loader)
     inf_dl = torch.utils.data.DataLoader(images, batch_size=32, shuffle=False, num_workers=4)
     print('done loading images')  # Output: done
 
@@ -233,35 +246,35 @@ if __name__ == '__main__':
     end = time.time()
     print("created the output folders in: ", end - start, "seconds")
 
-    # Visualise the contours
-    import matplotlib.pyplot as plt
-    import matplotlib.patches as patches
+    # # Visualise the contours
+    # import matplotlib.pyplot as plt
+    # import matplotlib.patches as patches
 
 
-    def get_contours(fname, show_img=False):
-        img = np.array(Image.open(fname).convert('L'))
-        fig, ax = plt.subplots()
-        ax.imshow(img, cmap='gray')
-        plt.show()
+    # def get_contours(fname, show_img=False):
+    #     img = np.array(Image.open(fname).convert('L'))
+    #     fig, ax = plt.subplots()
+    #     ax.imshow(img, cmap='gray')
+    #     plt.show()
 
-        ret, thresh = cv2.threshold(img.astype(np.uint8), 100, 255, cv2.THRESH_TRUNC)
-        contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
+    #     ret, thresh = cv2.threshold(img.astype(np.uint8), 100, 255, cv2.THRESH_TRUNC)
+    #     contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
 
-        # find the biggest countour (c) by the area
-        c = max(contours, key=cv2.contourArea)
-        x, y, w, h = cv2.boundingRect(c)
+    #     # find the biggest countour (c) by the area
+    #     c = max(contours, key=cv2.contourArea)
+    #     x, y, w, h = cv2.boundingRect(c)
 
-        if show_img:
-            fig, ax = plt.subplots()
-            ax.imshow(img, cmap='gray')
-            rect = patches.Rectangle((x, y), w, h, linewidth=1, edgecolor='r', facecolor='none')
-            ax.add_patch(rect)
-            plt.show()
-        print(img.size)
+    #     if show_img:
+    #         fig, ax = plt.subplots()
+    #         ax.imshow(img, cmap='gray')
+    #         rect = patches.Rectangle((x, y), w, h, linewidth=1, edgecolor='r', facecolor='none')
+    #         ax.add_patch(rect)
+    #         plt.show()
+    #     print(img.size)
 
 
-    image_num = 10
-    get_contours(file_paths[image_num], True)
+    # image_num = 10
+    # get_contours(file_paths[image_num], True)
 
     print('Classification Complete!!')
 
